@@ -1,29 +1,13 @@
 
-import Image from "next/image";
+import LeftSidebar from "@/components/homepage/news/LeftSidebar";
+import RightSidebar from "@/components/homepage/news/RightSidebar";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const getCategory = async()=>{
-const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories")
-const result = await res.json()
-return result
-}
+const default_category_id = "chal"
 
 export default async function Home() {
- const categories = await getCategory()
- console.log(categories);
+  
+  redirect(`/category/${default_category_id}`)
 
-  return (
-    <>
-    <div className="grid grid-cols-12 mt-8">
-      <div className="col-span-3">All categoris
-        <ul className="flex flex-col gap-4 mt-6">
-          {categories.map(category=>{
-          return  <li key={category.id} className="text-white bg-green-300 text-lg font-bold text-center rounded-2xl p-2">{category.nameBn}</li>
-          })}
-        </ul>
-      </div>
-      <div className="col-span-6">All news</div>
-      <div className="col-span-3">Social Icon</div>
-    </div>
-    </>
-  );
 }
